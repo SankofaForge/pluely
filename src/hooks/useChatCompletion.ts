@@ -61,6 +61,7 @@ export const useChatCompletion = (
     allSttProviders,
     selectedAudioDevices,
     hasActiveLicense,
+    hasOpenSourceFeatures,
   } = useApp();
 
   const [state, setState] = useState<ChatCompletionState>({
@@ -591,8 +592,7 @@ export const useChatCompletion = (
         screenshotInitiatedByThisContext.current = false;
       } else {
         // Selection Mode: Open overlay to select an area
-        // Only allow if user has active license
-        if (!hasActiveLicense) {
+        if (!hasOpenSourceFeatures) {
           setState((prev) => ({
             ...prev,
             error: "Selection mode requires an active license",
@@ -616,7 +616,7 @@ export const useChatCompletion = (
         setIsScreenshotLoading(false);
       }
     }
-  }, [handleScreenshotSubmit, hasActiveLicense]);
+  }, [handleScreenshotSubmit, hasOpenSourceFeatures]);
 
   useEffect(() => {
     let unlisten: any;

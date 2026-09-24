@@ -18,6 +18,7 @@ export const useSettings = () => {
     onSetSelectedAIProvider,
     onSetSelectedSttProvider,
     hasActiveLicense,
+    hasOpenSourceFeatures,
   } = useApp();
   const [variables, setVariables] = useState<{ key: string; value: string }[]>(
     []
@@ -50,7 +51,7 @@ export const useSettings = () => {
   };
 
   const handleScreenshotEnabledChange = (enabled: boolean) => {
-    if (!enabled && !hasActiveLicense) {
+    if (!enabled && !hasOpenSourceFeatures) {
       return;
     }
     const newConfig = { ...screenshotConfiguration, enabled };
@@ -112,5 +113,6 @@ export const useSettings = () => {
     variables,
     sttVariables,
     hasActiveLicense,
+    hasOpenSourceFeatures,
   };
 };

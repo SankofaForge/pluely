@@ -132,6 +132,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     DEFAULT_CUSTOMIZABLE_STATE
   );
   const [hasActiveLicense, setHasActiveLicense] = useState<boolean>(false);
+  const hasOpenSourceFeatures = true;
   const [supportsImages, setSupportsImagesState] = useState<boolean>(() => {
     const stored = safeLocalStorage.getItem(STORAGE_KEYS.SUPPORTS_IMAGES);
     return stored === null ? true : stored === "true";
@@ -174,7 +175,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const syncLicenseState = async () => {
       try {
         await invoke("set_license_status", {
-          hasLicense: hasActiveLicense,
+          hasLicense: hasActiveLicense || hasOpenSourceFeatures,
         });
 
         const config = getShortcutsConfig();
@@ -185,7 +186,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     };
 
     syncLicenseState();
-  }, [hasActiveLicense]);
+  }, [hasActiveLicense, hasOpenSourceFeatures]);
 
   // Function to load AI, STT, system prompt and screenshot config data from storage
   const loadData = () => {
@@ -674,6 +675,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     pluelyApiEnabled,
     setPluelyApiEnabled,
     hasActiveLicense,
+    hasOpenSourceFeatures,
     setHasActiveLicense,
     getActiveLicenseStatus,
     selectedAudioDevices,

@@ -10,13 +10,13 @@ import {
 
 export const Theme = () => {
   const { theme, transparency, setTheme, onSetTransparency } = useTheme();
-  const { hasActiveLicense } = useApp();
+  const { hasOpenSourceFeatures } = useApp();
 
   return (
     <div id="theme" className="relative space-y-3">
       <Header
         title={`Theme Customization ${
-          hasActiveLicense
+          hasOpenSourceFeatures
             ? ""
             : " (You need an active license to use this feature)"
         }`}
@@ -27,7 +27,7 @@ export const Theme = () => {
       {/* Theme Toggle */}
       <div
         className={`space-y-2 ${
-          hasActiveLicense ? "" : "opacity-60 pointer-events-none"
+          hasOpenSourceFeatures ? "" : "opacity-60 pointer-events-none"
         }`}
       >
         <div className="flex items-center justify-between">
@@ -89,7 +89,7 @@ export const Theme = () => {
       {/* Transparency Slider */}
       <div
         className={`space-y-2 ${
-          hasActiveLicense ? "" : "opacity-60 pointer-events-none"
+          hasOpenSourceFeatures ? "" : "opacity-60 pointer-events-none"
         }`}
       >
         <Header
